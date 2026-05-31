@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>סשן ויז׳ן | תמר שוקר — Leap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal: #40B8BB;
+      --teal-dim: rgba(64,184,187,0.15);
+      --purple: #BC67A5;
+      --yellow: #FDCC67;
+      --green: #9AC879;
+      --gold: #D1C29B;
+      --charcoal: #3C3C3B;
+      --blue-grey: #5B6489;
+      --dark: #1E2340;
+      --dark-2: #252B47;
+      --white: #ffffff;
+      --cream: #F8F6F2;
+      --font: 'Assistant', sans-serif;
+      --max-w: 1100px;
+      --r: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      color: var(--charcoal);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .inner { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
+    .d5 { transition-delay: 0.5s; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background 0.3s, backdrop-filter 0.3s;
+    }
+    .nav.scrolled {
+      background: rgba(30,35,64,0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .nav-logo img { height: 38px; filter: brightness(0) invert(1); }
+    .nav-cta {
+      background: var(--purple);
+      color: #fff;
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: 100px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: #a8559b; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(150deg, var(--dark) 0%, var(--dark-2) 50%, var(--blue-grey) 100%);
+      display: flex; align-items: center;
+      padding: 130px 24px 100px;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -1px; left: 0; right: 0; height: 90px;
+      background: var(--cream);
+      clip-path: ellipse(60% 100% at 50% 100%);
+    }
+    /* decorative circle */
+    .hero-circle {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(64,184,187,0.12) 0%, transparent 70%);
+      top: -100px; left: -100px;
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 60px;
+      align-items: center;
+      position: relative; z-index: 1;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--teal-dim);
+      border: 1px solid rgba(64,184,187,0.4);
+      color: var(--teal);
+      font-size: 13px; font-weight: 700;
+      padding: 6px 16px; border-radius: 100px;
+      margin-bottom: 28px; letter-spacing: 0.5px;
+    }
+    .hero-tag::before { content: '●'; font-size: 8px; }
+    .hero-title {
+      font-size: clamp(38px, 5.5vw, 68px);
+      font-weight: 800; color: #fff;
+      line-height: 1.15; margin-bottom: 24px;
+    }
+    .hero-title .accent { color: var(--teal); }
+    .hero-body {
+      font-size: clamp(16px, 2vw, 19px);
+      color: rgba(255,255,255,0.7);
+      line-height: 1.75; margin-bottom: 36px;
+      max-width: 500px;
+    }
+    .hero-body strong { color: #fff; }
+    .hero-price {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 32px; flex-wrap: wrap;
+    }
+    .hero-price-main {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800; color: var(--yellow);
+    }
+    .hero-price-divider { color: rgba(255,255,255,0.25); font-size: 20px; }
+    .hero-price-alt {
+      font-size: 15px; color: rgba(255,255,255,0.45);
+    }
+    .hero-price-alt del { color: rgba(255,255,255,0.3); }
+    .btn-hero {
+      display: inline-block;
+      background: var(--purple); color: #fff;
+      font-family: var(--font); font-size: 18px; font-weight: 800;
+      padding: 18px 44px; border-radius: 100px;
+      box-shadow: 0 8px 32px rgba(188,103,165,0.45);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-hero:hover { background: #a8559b; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(188,103,165,0.5); }
+    .hero-img-wrap {
+      position: relative;
+    }
+    .hero-img-wrap::before {
+      content: '';
+      position: absolute; inset: -10px;
+      border-radius: 28px;
+      border: 1px solid rgba(64,184,187,0.25);
+      z-index: 0;
+    }
+    .hero-img-wrap img {
+      width: 100%; border-radius: 20px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+      position: relative; z-index: 1;
+    }
+
+    /* ── QUOTE STRIP ── */
+    .quote-strip {
+      background: var(--cream);
+      padding: 72px 24px;
+      text-align: center;
+    }
+    .quote-strip blockquote { max-width: 680px; margin: 0 auto; }
+    .quote-strip p {
+      font-size: clamp(20px, 2.8vw, 30px);
+      font-weight: 300; font-style: italic;
+      color: var(--charcoal); line-height: 1.5; margin-bottom: 16px;
+    }
+    .quote-strip cite {
+      font-size: 13px; font-weight: 700;
+      color: var(--teal); letter-spacing: 1px;
+      font-style: normal; text-transform: uppercase;
+    }
+
+    /* ── PAIN ── */
+    .pain-section {
+      background: var(--dark);
+      padding: 110px 24px 110px;
+      position: relative; overflow: hidden;
+    }
+    .pain-section::before {
+      content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 90px;
+      background: var(--cream);
+      clip-path: ellipse(60% 100% at 50% 0%);
+    }
+    .pain-section::after {
+      content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 90px;
+      background: var(--white);
+      clip-path: ellipse(60% 100% at 50% 100%);
+    }
+    .pain-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 360px;
+      gap: 80px; align-items: center;
+    }
+    .pain-kicker {
+      font-size: 12px; font-weight: 800; letter-spacing: 3px;
+      color: var(--teal); text-transform: uppercase; margin-bottom: 16px;
+    }
+    .pain-title {
+      font-size: clamp(26px, 3.5vw, 44px);
+      font-weight: 800; color: #fff;
+      line-height: 1.25; margin-bottom: 44px;
+    }
+    .pain-title em { color: var(--teal); font-style: normal; }
+    .pain-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+    .pain-list li {
+      display: flex; align-items: flex-start; gap: 16px;
+      font-size: 17px; color: rgba(255,255,255,0.75); line-height: 1.5;
+    }
+    .pain-num {
+      flex-shrink: 0; width: 26px; height: 26px;
+      border-radius: 50%; border: 1px solid rgba(64,184,187,0.35);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800; color: var(--teal);
+      margin-top: 3px;
+    }
+    .pain-photo img {
+      width: 100%; border-radius: var(--r);
+      filter: grayscale(20%) contrast(1.05);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    }
+
+    /* ── INCLUDED ── */
+    .included-section {
+      background: var(--white);
+      padding: 100px 24px;
+    }
+    .sec-hd { text-align: center; margin-bottom: 56px; }
+    .sec-tag {
+      display: inline-block;
+      font-size: 11px; font-weight: 800;
+      color: var(--teal); letter-spacing: 2.5px;
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .sec-title {
+      font-size: clamp(26px, 3.5vw, 42px);
+      font-weight: 800; color: var(--charcoal);
+      line-height: 1.25; margin-bottom: 10px;
+    }
+    .sec-sub {
+      font-size: 17px; color: #999;
+      max-width: 480px; margin: 0 auto;
+    }
+    .inc-grid {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid #EBEBEB;
+      border-radius: 24px; overflow: hidden;
+    }
+    .inc-card {
+      padding: 36px 28px; position: relative;
+      border-left: 1px solid #EBEBEB;
+      transition: background 0.3s;
+    }
+    .inc-card:last-child { border-left: none; }
+    .inc-card:hover { background: #F5FFFE; }
+    .inc-card-dark {
+      background: linear-gradient(160deg, var(--blue-grey), var(--dark));
+      border-left: none;
+    }
+    .inc-card-dark:hover { background: linear-gradient(160deg, var(--blue-grey), var(--dark)); filter: brightness(1.08); }
+    .inc-seq {
+      font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .inc-card:not(.inc-card-dark) .inc-seq { color: var(--teal); }
+    .inc-card-dark .inc-seq { color: var(--yellow); }
+    .inc-icon { width: 40px; height: 40px; margin-bottom: 14px; }
+    .inc-icon img { width: 40px; height: 40px; object-fit: contain; }
+    .inc-card-dark .inc-icon img { filter: brightness(0) invert(1) opacity(0.8); }
+    .inc-title-text {
+      font-size: 16px; font-weight: 800;
+      margin-bottom: 10px; line-height: 1.3;
+    }
+    .inc-card:not(.inc-card-dark) .inc-title-text { color: var(--charcoal); }
+    .inc-card-dark .inc-title-text { color: #fff; }
+    .inc-desc {
+      font-size: 14px; line-height: 1.65;
+    }
+    .inc-card:not(.inc-card-dark) .inc-desc { color: #888; }
+    .inc-card-dark .inc-desc { color: rgba(255,255,255,0.6); }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section {
+      background: var(--cream);
+      padding: 100px 24px;
+    }
+    .test-grid {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; align-items: stretch;
+    }
+    .test-card {
+      background: #fff; border-radius: 20px;
+      padding: 32px 28px 28px;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.05);
+      display: flex; flex-direction: column;
+    }
+    .test-mark {
+      font-size: 48px; font-weight: 800; color: var(--teal);
+      opacity: 0.15; line-height: 1; margin-bottom: -12px;
+      font-family: Georgia, serif;
+    }
+    .test-quote {
+      font-size: 17px; font-weight: 700;
+      color: var(--charcoal); line-height: 1.6; margin-bottom: 10px;
+    }
+    .test-body {
+      font-size: 14px; color: #888;
+      line-height: 1.7; flex-grow: 1; margin-bottom: 20px;
+    }
+    .test-author {
+      display: flex; align-items: center; gap: 12px;
+      border-top: 1px solid #F0F0F0; padding-top: 16px; margin-top: auto;
+    }
+    .test-av-img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
+    .test-av-init {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--teal); color: #fff;
+      font-size: 19px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .test-name { font-size: 15px; font-weight: 700; color: var(--charcoal); }
+    .test-role { font-size: 13px; color: #bbb; }
+
+    /* ── VIDEO ── */
+    .video-section {
+      background: var(--dark-2);
+      padding: 100px 24px; text-align: center;
+    }
+    .video-section h2 {
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 800; color: #fff; margin-bottom: 40px;
+    }
+    .video-section h2 em { color: var(--teal); font-style: normal; }
+    .video-wrap {
+      max-width: 720px; margin: 0 auto;
+      border-radius: 16px; overflow: hidden;
+      aspect-ratio: 16/9; position: relative;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+    /* ── SCIENCE ── */
+    .science-section {
+      background: var(--white);
+      padding: 100px 24px;
+    }
+    .science-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    .sci-body h3 {
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 800; color: var(--charcoal);
+      line-height: 1.3; margin-bottom: 24px;
+    }
+    .sci-body h3 em { color: var(--teal); font-style: normal; }
+    .sci-body p {
+      font-size: 16px; color: #666;
+      line-height: 1.85; margin-bottom: 16px;
+    }
+    .sci-body strong { color: var(--charcoal); font-weight: 700; }
+    .sci-quotes { display: flex; flex-direction: column; gap: 20px; }
+    .sci-quote {
+      border-right: 3px solid var(--teal);
+      padding: 20px 20px 20px 16px;
+      background: var(--cream);
+      border-radius: 0 12px 12px 0;
+    }
+    .sci-quote p {
+      font-size: 16px; font-style: italic;
+      color: var(--charcoal); line-height: 1.7; margin-bottom: 10px;
+    }
+    .sci-quote cite {
+      font-size: 13px; font-weight: 700;
+      color: var(--teal); font-style: normal;
+    }
+
+    /* ── HOW ── */
+    .how-section {
+      background: var(--blue-grey);
+      padding: 110px 24px;
+      position: relative; overflow: hidden;
+    }
+    .how-section::before {
+      content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 90px;
+      background: var(--white);
+      clip-path: ellipse(60% 100% at 50% 0%);
+    }
+    .how-section::after {
+      content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 90px;
+      background: var(--cream);
+      clip-path: ellipse(60% 100% at 50% 100%);
+    }
+    .how-inner {
+      max-width: 740px; margin: 0 auto; position: relative;
+    }
+    .how-section .sec-title { color: #fff; }
+    .how-section .sec-sub { color: rgba(255,255,255,0.55); }
+    .how-section .sec-tag { color: rgba(255,255,255,0.45); }
+    .how-duration {
+      text-align: center; margin-bottom: 52px;
+      font-size: 15px; color: rgba(255,255,255,0.55);
+    }
+    .how-duration strong { color: var(--teal); }
+    .step-list { display: flex; flex-direction: column; }
+    .step {
+      display: grid;
+      grid-template-columns: 48px 2px 1fr;
+      column-gap: 20px;
+      padding-bottom: 36px;
+    }
+    .step:last-child { padding-bottom: 0; }
+    .step-num {
+      width: 48px; height: 48px;
+      border-radius: 50%; background: var(--teal); color: #fff;
+      font-size: 20px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .step-num-gift { background: var(--yellow); color: var(--charcoal); font-size: 18px; }
+    .step-line {
+      background: rgba(255,255,255,0.15);
+      margin-top: 48px;
+    }
+    .step:last-child .step-line { display: none; }
+    .step-content { padding-top: 10px; grid-column: 3; }
+    .step-content h3 {
+      font-size: 19px; font-weight: 800; color: #fff; margin-bottom: 6px;
+    }
+    .step-content p { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.65; }
+    .step-gift-box {
+      background: rgba(253,204,103,0.1);
+      border: 1px solid rgba(253,204,103,0.2);
+      border-radius: 14px;
+      padding: 16px 20px; margin-top: -8px;
+    }
+    .step-gift-box h3 { color: var(--yellow); }
+
+    /* ── SCREENSHOTS ── */
+    .screenshots-section {
+      background: var(--cream);
+      padding: 100px 24px;
+    }
+    .screenshots-grid {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+    .shot-card {
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.09);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .shot-card:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(0,0,0,0.14); }
+    .shot-card img { width: 100%; height: auto; display: block; }
+
+    /* ── NLP ── */
+    .nlp-section {
+      background: var(--dark);
+      padding: 100px 24px;
+    }
+    .nlp-section .sec-title { color: #fff; }
+    .nlp-section .sec-sub { color: rgba(255,255,255,0.5); }
+    .nlp-section .sec-tag { color: var(--teal); }
+    .nlp-grid {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; border-radius: 24px; overflow: hidden;
+      background: rgba(255,255,255,0.04);
+    }
+    .nlp-card {
+      padding: 34px 28px;
+      background: rgba(255,255,255,0.03);
+      transition: background 0.25s;
+    }
+    .nlp-card:hover { background: rgba(64,184,187,0.07); }
+    .nlp-num {
+      font-size: 11px; font-weight: 800; color: var(--teal);
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .nlp-card h4 { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .nlp-card p { font-size: 14px; color: rgba(255,255,255,0.52); line-height: 1.7; }
+    .nlp-card p em { color: var(--teal); font-style: normal; }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: var(--teal);
+      padding: 44px 24px; text-align: center;
+    }
+    .cta-band p {
+      font-size: clamp(18px, 2.5vw, 24px); font-weight: 700;
+      color: #fff; margin-bottom: 20px;
+    }
+
+    /* ── FAQ ── */
+    .faq-section {
+      background: var(--white);
+      padding: 100px 24px;
+    }
+    .faq-list {
+      max-width: 740px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .faq-item { border-bottom: 1px solid #EBEBEB; }
+    .faq-item summary {
+      padding: 20px 0;
+      cursor: pointer;
+      font-size: 17px; font-weight: 700;
+      color: var(--charcoal);
+      list-style: none;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+'; font-size: 24px; color: var(--teal);
+      flex-shrink: 0; transition: transform 0.2s; line-height: 1;
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item p { padding: 0 0 20px; font-size: 15px; color: #666; line-height: 1.8; }
+    .faq-item p a { color: var(--teal); text-decoration: underline; }
+
+    /* ── FINAL CTA ── */
+    .final-section {
+      background: linear-gradient(150deg, var(--dark) 0%, var(--blue-grey) 100%);
+      padding: 100px 24px 90px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .final-section::before {
+      content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 90px;
+      background: var(--white);
+      clip-path: ellipse(60% 100% at 50% 0%);
+    }
+    .final-section h2 {
+      font-size: clamp(28px, 4vw, 50px);
+      font-weight: 800; color: #fff; margin-bottom: 10px;
+    }
+    .final-section h2 em { color: var(--teal); font-style: normal; }
+    .final-sub { font-size: 18px; color: rgba(255,255,255,0.6); margin-bottom: 44px; }
+    .final-prices {
+      display: inline-grid;
+      grid-template-columns: 1fr auto 1fr;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 20px; margin-bottom: 36px; overflow: hidden;
+    }
+    .fp {
+      display: grid; grid-template-rows: auto auto 1fr auto;
+      text-align: center; padding: 26px 44px;
+    }
+    .fp-label {
+      font-size: 11px; font-weight: 800;
+      color: rgba(255,255,255,0.45); letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .fp-x {
+      font-size: 14px; font-weight: 700;
+      color: rgba(255,255,255,0.3); padding: 4px 0;
+    }
+    .fp-sp { font-size: 14px; padding: 4px 0; visibility: hidden; }
+    .fp-amount {
+      font-size: clamp(36px, 5vw, 54px);
+      font-weight: 800; color: var(--yellow); line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .fp-foot { font-size: 13px; padding-top: 4px; line-height: 1.4; visibility: hidden; }
+    .fp-strike {
+      font-size: 13px; color: rgba(255,255,255,0.3);
+      text-decoration: line-through; padding-top: 4px; line-height: 1.4;
+    }
+    .fp-sep {
+      font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.3);
+      border-right: 1px solid rgba(255,255,255,0.1);
+      border-left: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center; width: 40px;
+    }
+    .form-wrap {
+      display: flex; justify-content: center;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-block;
+      background: var(--purple); color: #fff;
+      font-family: var(--font); font-size: 17px; font-weight: 800;
+      padding: 16px 36px; border-radius: 100px;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 6px 24px rgba(188,103,165,0.35);
+    }
+    .btn:hover { background: #a8559b; transform: translateY(-2px); }
+    .btn-white {
+      background: #fff; color: var(--purple);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    }
+    .btn-white:hover { background: #f5f5f5; transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--dark); padding: 28px 24px; text-align: center;
+    }
+    .footer p { font-size: 14px; color: rgba(255,255,255,0.35); }
+    .footer a { color: var(--teal); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-img-wrap { display: none; }
+      .pain-inner { grid-template-columns: 1fr; }
+      .pain-photo { display: none; }
+      .science-inner { grid-template-columns: 1fr; gap: 48px; }
+      .inc-grid { grid-template-columns: repeat(2, 1fr); }
+      .test-grid { grid-template-columns: 1fr; }
+      .screenshots-grid { grid-template-columns: repeat(3, 1fr); }
+      .nlp-grid { grid-template-columns: repeat(2, 1fr); }
+      .final-prices { grid-template-columns: 1fr; border-radius: 16px; }
+      .fp-sep { border: none; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); width: auto; height: 36px; }
+      .fp { padding: 20px 32px; }
+    }
+    @media (max-width: 600px) {
+      .inc-grid { grid-template-columns: 1fr; }
+      .nlp-grid { grid-template-columns: 1fr; }
+      .screenshots-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 420px) {
+      .screenshots-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-logo"><img src="assets/logo-final.png" alt="Leap"></div>
+    <a href="#register" class="nav-cta">אני רוצה ויז׳ן!</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-circle"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-tag reveal">סשן ויז׳ן אונליין 1 על 1</div>
+        <h1 class="hero-title reveal d1">
+          תנו לי ליצור את<br>
+          <span class="accent">הויז׳ן</span> בשבילכם
+        </h1>
+        <p class="hero-body reveal d2">
+          סשן 1 על 1 בו אני שולפת מהלא מודע שלך את התמונה המדוייקת של ההגשמה הבוערת בך <strong>בלי להתאמץ,</strong> בלי צורך במשמעת עצמית או כוח <strong>ובלי אפילו לצאת מהבית!</strong>
+        </p>
+        <a href="#register" class="btn-hero reveal d3">תמר, אני רוצה סשן ויז׳ן!</a>
+      </div>
+      <div class="hero-img-wrap reveal d2">
+        <img src="assets/dream-manifest.jpg" alt="סשן ויז׳ן אישי">
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-strip">
+    <blockquote>
+      <p class="reveal">״אדם ללא חזון זה כמו ספינה ללא הגה״</p>
+      <cite class="reveal d1">תומאס קרלייל — פילוסוף והוגה דעות בריטי</cite>
+    </blockquote>
+  </section>
+
+  <!-- PAIN -->
+  <section class="pain-section">
+    <div class="pain-inner">
+      <div>
+        <h2 class="pain-title reveal">
+          ידוע לך כבר כמה עוצמתי<br>
+          כלי הויזואליזציה יכול להיות —<br>
+          אז למה זה <em>עדיין לא קורה?</em>
+        </h2>
+        <ul class="pain-list">
+          <li class="reveal"><span class="pain-num">1</span><span>לא מצאת את הזמן והכוח לעשות את זה</span></li>
+          <li class="reveal d1"><span class="pain-num">2</span><span>זה מרגיש לך קשה מידי</span></li>
+          <li class="reveal d2"><span class="pain-num">3</span><span>יצרת ויז׳ן אבל התוצאה לא מספיק בהירה ומרגשת עבורך</span></li>
+          <li class="reveal d1"><span class="pain-num">4</span><span>נתקעת בנקודות מסויימות וזה גרם לך לוותר</span></li>
+          <li class="reveal d2"><span class="pain-num">5</span><span>הויז׳ן שיצא נשמע לך רחוק מידי מהמציאות והפחדים עולים כל פעם מחדש</span></li>
+          <li class="reveal d1"><span class="pain-num">6</span><span>יש לך תחושה שעם הנחייה שלי זה ייצא הרבה יותר מהודק</span></li>
+          <li class="reveal d2"><span class="pain-num">7</span><span>מרגיש לך בפנים שמשהו שם עוד לא מדוייק לגמרי</span></li>
+        </ul>
+      </div>
+      <div class="pain-photo reveal d3">
+        <img src="assets/tamar-sea.jpg" alt="תמר שוקר">
+      </div>
+    </div>
+  </section>
+
+  <!-- INCLUDED -->
+  <section class="included-section">
+    <div class="inner">
+      <div class="sec-hd">
+        <div class="sec-tag reveal">מה מקבלים</div>
+        <h2 class="sec-title reveal d1">מה כולל סשן הויז׳ן?</h2>
+        <p class="sec-sub reveal d2">ארבעה שלבים שיובילו אותך אל הויז׳ן המדוייק שלך</p>
+      </div>
+      <div class="inc-grid reveal d1">
+        <div class="inc-card">
+          <div class="inc-icon"><img src="assets/icon-compass.png" alt="מצפן"></div>
+          <div class="inc-title-text">שליפת המצפן</div>
+          <p class="inc-desc">נשלוף ויז׳ן ברור שיתכנת את המוח שלך מחדש, מתוך האנרגיה הטבעית שלך, וישמש לך כמצפן לעבר הגשמת היעד</p>
+        </div>
+        <div class="inc-card">
+          <div class="inc-icon"><img src="assets/icon-vortex.png" alt="מערבולת"></div>
+          <div class="inc-title-text">חשיפת מערבולות נסתרות</div>
+          <p class="inc-desc">נבין אילו מחסומים החלק הפרימיטיבי של הלא-מודע יוצר, ואיך להתגבר עליהם בפשטות בעזרת NLP</p>
+        </div>
+        <div class="inc-card">
+          <div class="inc-icon"><img src="assets/icon-sailboat.png" alt="מפרשית"></div>
+          <div class="inc-title-text">חיזוק מפרשים</div>
+          <p class="inc-desc">נגלה מהם המשאבים שכבר קיימים בך שיישמשו לך כמפרש רוח בהפלגה לעבר ההגשמה שלך</p>
+        </div>
+        <div class="inc-card inc-card-dark">
+          <div class="inc-icon" style="font-size:28px; line-height:1; display:flex; align-items:center; filter:none;">🎧</div>
+          <div class="inc-title-text">הקלטת אודיו אישית — במתנה</div>
+          <p class="inc-desc">לאחר הסשן תקבל הקלטה של הויז׳ן שלך לשמוע כל בוקר — ככה המוח מתחיל לחוות את זה כזיכרון אמיתי</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div class="inner">
+      <div class="sec-hd">
+        <div class="sec-tag reveal">מה אומרים</div>
+        <h2 class="sec-title reveal d1">אנשים שעבדו איתי מספרים</h2>
+      </div>
+      <div class="test-grid">
+        <div class="test-card reveal">
+          <div class="test-mark">"</div>
+          <p class="test-quote">״אני ממש לא מעכל את זה — זה ממש קוואנטי״</p>
+          <p class="test-body">עבדתי עם תמר בויז׳ן על מילוי הקליניקה וסדנה חדשה. עברו רק כמה חודשים, הסדנה הראשונה היתה מטורפת, עוד רגע ממלא את השנייה והשלישית בדרך... אם מישהו היה אומר לי לפני חצי שנה שאני אלמד מטפלים זה היה הזוי.</p>
+          <div class="test-author">
+            <img class="test-av-img" src="assets/testimonial-avi.jpg" alt="אבי רוט">
+            <div>
+              <div class="test-name">אבי רוט</div>
+              <div class="test-role">מטפל NLP בהתמכרויות</div>
+            </div>
+          </div>
+        </div>
+        <div class="test-card reveal d1">
+          <div class="test-mark">"</div>
+          <p class="test-quote">״הסשן שעשינו היה חזק ועוצמתי עבורי עד שיכולתי להרגיש את עצמי שם״</p>
+          <p class="test-body">השיקוף שעשית בחזרתיות היה מקסים וגם ההקלטה ששלחת!!! תודה רבה על כל הכלים שרכשת ורוכשת כדי לעזור לאחרים להגשים חזון ומטרות! אלופה שאת!! ממליצה מכל הלב ומחכה לפעם הבאה ❤️</p>
+          <div class="test-author">
+            <img class="test-av-img" src="assets/testimonial-dasi.jpg" alt="דסי לייבל">
+            <div>
+              <div class="test-name">דסי לייבל</div>
+              <div class="test-role">מייסדת קבוצת לייבל השקעות</div>
+            </div>
+          </div>
+        </div>
+        <div class="test-card reveal d2">
+          <div class="test-mark">"</div>
+          <p class="test-quote">״עברתי חוויה נפלאה, לראות את עצמי בעוד שנה מהיום בכל תחומי החיים״</p>
+          <p class="test-body">בעזרת שאלת השאלות והתייחסות לכל החושים, הרגשתי שאני שם. תודה שהובלת אותי על ידי שאילת השאלות הנכונות. היופי והייחוד היה שבעזרת הכוונה התמקדתי באישיות ובתכונות שלי שיובילו אותי לעתיד אותו אני רוצה.</p>
+          <div class="test-author">
+            <img class="test-av-img" src="assets/testimonial-irit.jpg" alt="אירית צווייג רביע">
+            <div>
+              <div class="test-name">אירית צווייג רביע</div>
+              <div class="test-role">מנחת הורים</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="video-section">
+    <h2 class="reveal">ככה <em>הדר זמל</em> סיימה את הסשן — כדאי לצפות</h2>
+    <div class="video-wrap reveal d1">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/ke7m77kubvI?si=8Y5w_XFDqGjwAm9H" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- SCIENCE -->
+  <section class="science-section">
+    <div class="science-inner inner">
+      <div class="sci-body reveal">
+        <h3>למה ויז׳ן מוחשי <em>באמת</em> עובד?</h3>
+        <p>במוח שלנו יש מערכת שנקראת <strong>Reticular Activating System (RAS)</strong> — רשת של קשרים בין נוירונים שמכילה את כל הזיכרונות, החוויות והמחשבות שלנו.</p>
+        <p>ככל שאנחנו חושבים על אותם דברים שוב ושוב, הקשרים האלה מתחזקים. אבל כשיש משהו שרוצים להגשים ועדיין לא עשינו — הקשר הזה עדיין לא קיים, והמוח תופס את זה כקשה להשגה, אפילו בלתי אפשרי.</p>
+        <p>ויז׳ן מוחשי יוצר <strong>זיכרון מומצא</strong> — המוח חווה אותו כאילו עשיתם את זה כבר. ואז להגשים את זה במציאות יהיה הרבה יותר קליל, זורם, בלי מאמץ.</p>
+      </div>
+      <div class="sci-quotes reveal d1">
+        <blockquote class="sci-quote">
+          <p>״לא ניתן ליצור שום דבר גדול יותר ממה שקיים היום ללא ויז׳ן״</p>
+          <cite>— טוני רובינס</cite>
+        </blockquote>
+        <blockquote class="sci-quote">
+          <p>״אנחנו יכולים להיות באותה מידה אפקטיביים ב-15 דקות של מחשבה ודמיון כמו 16 שעות של עבודה קשה״</p>
+          <cite>— אבהרם היקס</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section">
+    <div class="how-inner inner">
+      <div class="sec-hd">
+        <div class="sec-tag reveal">אז איך זה עובד?</div>
+        <h2 class="sec-title reveal d1">מה הסשן כולל?</h2>
+        <p class="sec-sub reveal d2">⏱ אורך הסשן הוא <strong>60 דקות</strong> — שיחת וידאו אונליין, נוח מהבית</p>
+      </div>
+      <div class="step-list">
+        <div class="step reveal">
+          <div class="step-num">1</div>
+          <div class="step-line"></div>
+          <div class="step-content">
+            <h3>כללים ליצירת ויז׳ן אפקטיבי</h3>
+            <p>אסביר לך את הכללים של יצירת ויז׳ן אפקטיבי כדי שייטמעו טוב טוב גם בלא מודע</p>
+          </div>
+        </div>
+        <div class="step reveal d1">
+          <div class="step-num">2</div>
+          <div class="step-line"></div>
+          <div class="step-content">
+            <h3>שאלות והכוונה</h3>
+            <p>אנחה אותך באמצעות שאלות והכוונה כדי להוציא ממך את הרצון העמוק המרגש והמדוייק שלך</p>
+          </div>
+        </div>
+        <div class="step reveal d2">
+          <div class="step-num">3</div>
+          <div class="step-line"></div>
+          <div class="step-content">
+            <h3>מציאת מחסומים ומענה</h3>
+            <p>אכווין אותך בשאלות למציאת המחסומים שעלולים למנוע ממך מלהגשים ונמצא את המענה המותאם לכל מחסום</p>
+          </div>
+        </div>
+        <div class="step reveal d3">
+          <div class="step-num">4</div>
+          <div class="step-line"></div>
+          <div class="step-content">
+            <h3>קריאת הויז׳ן שלך</h3>
+            <p>נסיים בקריאה משותפת של הויז׳ן שיצא — כדי שהוא יחדור עמוק ויתחיל לעשות את העבודה</p>
+          </div>
+        </div>
+        <div class="step reveal d4">
+          <div class="step-num step-num-gift">🎧</div>
+          <div class="step-line"></div>
+          <div class="step-content step-gift-box">
+            <h3>הקלטה אישית — במתנה</h3>
+            <p>לאחר הסשן אשלח לך הקלטת אודיו של הויז׳ן שלך לשמוע כל בוקר — ככה המוח מתחיל לחוות את זה כזיכרון אמיתי וההגשמה הופכת לטבעית</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENSHOTS -->
+  <section class="screenshots-section">
+    <div class="inner">
+      <div class="sec-hd">
+        <h2 class="sec-title reveal">עוד לקוחות מספרים</h2>
+      </div>
+      <div class="screenshots-grid">
+        <div class="shot-card reveal"><img src="assets/testimonial-ori.jpg" alt="אורי"></div>
+        <div class="shot-card reveal d1"><img src="assets/testimonial-hadar.png" alt="הדר זמל"></div>
+        <div class="shot-card reveal d2"><img src="assets/testimonial-lilach.png" alt="לילך תבור"></div>
+        <div class="shot-card reveal d3"><img src="assets/testimonial-apartment.jpg" alt="קניתי דירה"></div>
+        <div class="shot-card reveal d4"><img src="assets/testimonial-contract.jpg" alt="חתמתי חוזה"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NLP -->
+  <section class="nlp-section">
+    <div class="inner">
+      <div class="sec-hd">
+        <div class="sec-tag reveal">מדע ה-NLP</div>
+        <h2 class="sec-title reveal d1">6 הכללים לויז׳ן שעובד</h2>
+        <p class="sec-sub reveal d2">אלו הכללים שאני מיישמת בכל סשן כדי שהויז׳ן שלך יחדור ללא-מודע ויתחיל לעבוד</p>
+      </div>
+      <div class="nlp-grid">
+        <div class="nlp-card reveal">
+          <div class="nlp-num">כלל 1</div>
+          <h4>ניסוח חיובי</h4>
+          <p>הלא-מודע מתעלם מהמילה "לא". חשוב לנסח מה את <em>כן</em> רוצה, כדי שהאנרגיה תהיה מופנית לשם — בלי "יותר" או "פחות", כמה שיותר מדויק.</p>
+        </div>
+        <div class="nlp-card reveal d1">
+          <div class="nlp-num">כלל 2</div>
+          <h4>זמן הווה + כל החושים</h4>
+          <p>המוח צריך להרגיש שאת כבר שם. מה את רואה, שומעת, מריחה, מרגישה — פרטים מדויקים שיוצרים חוויה של ״כבר קרה״.</p>
+        </div>
+        <div class="nlp-card reveal d2">
+          <div class="nlp-num">כלל 3</div>
+          <h4>הוכחת ההצלחה</h4>
+          <p>איך תדעי שהגעת? הגדרה מדויקת של ההוכחות המוחשיות מונעת מאיתנו להשיג דברים ולא לשים לב — ומחזקת תחושת המסוגלות.</p>
+        </div>
+        <div class="nlp-card reveal">
+          <div class="nlp-num">כלל 4</div>
+          <h4>בשליטתך בלבד</h4>
+          <p>הויז׳ן חייב להיות תלוי בך ורק בך — לא בהתנהגות של אחרים. ככה את יכולה לפעול ולהתקדם בלי להמתין לגורמים חיצוניים.</p>
+        </div>
+        <div class="nlp-card reveal d1">
+          <div class="nlp-num">כלל 5</div>
+          <h4>אקולוגיה — יתרונות וחסרונות</h4>
+          <p>לפעמים הלא-מודע מתנגד כי הוא חושש שהתוצאה תפגע בתחומים אחרים. בסשן אנחנו מזהות את ההתנגדויות ומוצאות להן מענה.</p>
+        </div>
+        <div class="nlp-card reveal d2">
+          <div class="nlp-num">כלל 6</div>
+          <h4>תשוקה</h4>
+          <p>הויז׳ן חייב לרגש. רק תשוקה אמיתית וברורה מספיק תניע אותך להתגבר על כל אתגר שיגיע בדרך, במקום לוותר במכשול הראשון.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <p class="reveal">רוצה לגלות את הויז׳ן שממתין לך?</p>
+    <a href="#register" class="btn btn-white reveal d1">כן! אני רוצה ליצור את הויז׳ן שלי</a>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="inner">
+      <div class="sec-hd">
+        <h2 class="sec-title reveal">שאלות ששאלו אותי</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item reveal">
+          <summary>אני רוצה אבל מרגישה שעוד לא מוכנה לזה, האם זה רלוונטי?</summary>
+          <p>הרגשת המוכנות היא אשלייה. אנחנו אף פעם לא מרגישים מוכנים למשהו שהוא גדול מאיתנו. לכן אני מאמינה שדווקא עכשיו זה הזמן. בסשן אני משתמשת בטכניקות שעוזרות לשלוף מה״לא-מודע״ את הרצונות שלך ואין צורך להתאמץ. האנשים שהגיעו הכי רחוק ולהצלחות הכי גדולות הם אלו שלא חיכו להיות מוכנים.</p>
+        </details>
+        <details class="faq-item reveal d1">
+          <summary>יש לי כבר ויז׳ן שכתבתי לבד, מה הסשן יכול להוסיף לי?</summary>
+          <p>ההבדל בסשן האישי הוא שאני עושה הכל בשבילך, אין לך צורך לכתוב או לחשוב וככה המודע שלך יכול לנוח ולאפשר ללא מודע להעלות את הדברים האמיתיים והעמוקים מתוכך. בנוסף אני דואגת לסגור את הויז׳ן מכל הזויות עם כל החושים וזיהוי כל החסמים שעלולים לעלות בדרך להגשמתו.</p>
+        </details>
+        <details class="faq-item reveal d2">
+          <summary>האם אפשר להיפגש פיסית ולא אונליין?</summary>
+          <p>כרגע אין אופציה כזו. מנסיוני הסשנים אונליין היו מאוד מוצלחים, ויש להם יתרון ענק בכך שאפשר להישאר בבית במקום בו נוח לך.</p>
+        </details>
+        <details class="faq-item reveal d3">
+          <summary>אני לא מוצא תאריך ושעה שנוח לי? האם יש אפשרות לקבוע זמן אחר?</summary>
+          <p>כן, <a href="https://wa.me/+9720547862774" target="_blank">כתבו לי הודעה בוואטסאפ</a> ונתאם משהו מותאם לך.</p>
+        </details>
+        <details class="faq-item reveal d4">
+          <summary>האם יש דרך אחרת לשלם?</summary>
+          <p>ניתן לשלם בכל אפליקציית תשלום שנוח לך — ביט, פפר, פייבוקס, העברה בנקאית או בכרטיס אשראי.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>יש לך שאלה שעוד לא עניתי עליה?</summary>
+          <p>אפשר לשלוח לי את השאלה למייל <a href="mailto:hello@tamar-leap.com">hello@tamar-leap.com</a> או <a href="https://wa.me/+9720547862774" target="_blank">לוואטסאפ</a></p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-section" id="register">
+    <h2 class="reveal">רוצה לגלות את <em>הויז׳ן</em> שלך?</h2>
+    <p class="final-sub reveal d1">הסשן הוא אונליין ומשנה חיים.</p>
+    <div style="display:flex; justify-content:center;" class="reveal d2">
+      <div class="final-prices">
+        <div class="fp">
+          <div class="fp-label">2 תשלומים</div>
+          <div class="fp-x">×</div>
+          <div class="fp-amount">165 ₪</div>
+          <div class="fp-foot">&nbsp;</div>
+        </div>
+        <div class="fp-sep">או</div>
+        <div class="fp">
+          <div class="fp-label">תשלום אחד</div>
+          <div class="fp-sp">×</div>
+          <div class="fp-amount">330 ₪</div>
+          <div class="fp-strike">במקום 450 ₪</div>
+        </div>
+      </div>
+    </div>
+    <p class="reveal d3" style="font-size:13px; color:rgba(255,255,255,0.45); margin-bottom:16px; letter-spacing:0.3px;">🔒 כאן עוברים לתשלום מאובטח</p>
+    <div class="form-wrap reveal d3">
+      <iframe width="355" height="326" style="max-width:100%" src="https://embed.vp4.me/LandingPage,bab7ad3f-97d5-4a32-aad1-043d5f472a97,611005.aspx?r=1009" frameborder="0" allowfullscreen class="embediframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation allow-top-navigation-by-user-activation"></iframe>
+      <script type="text/javascript" src="https://embed.vp4.me/core/embd.min.js?v=20260530155820"></script>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© Leap | תמר שוקר | <a href="mailto:hello@tamar-leap.com">hello@tamar-leap.com</a></p>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+  </script>
+
+</body>
+</html>
