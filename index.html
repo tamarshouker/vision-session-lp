@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://popup.vp4.me/a_vip.js" type="text/javascript"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -710,7 +711,7 @@
   <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="nav-logo"><img src="assets/logo-final.png" alt="Leap"></div>
-    <a href="javascript:;" onclick="openPopup()" class="nav-cta">אני רוצה ויז׳ן!</a>
+    <a href="javascript:;" class="nav-cta popup-trigger">אני רוצה ויז׳ן!</a>
   </nav>
 
   <!-- HERO -->
@@ -726,7 +727,7 @@
         <p class="hero-body reveal d2">
           סשן 1 על 1 שבו נשלוף יחד את הויז׳ן המדויק שבוער בך, נסגור את החסמים שעוצרים אותך, ותצא עם תמונה כל כך מוחשית שהמוח כבר מתחיל לחוות אותה כמציאות.
         </p>
-        <a href="javascript:;" onclick="openPopup()" class="btn-hero reveal d3">אני רוצה לחווט מחדש את המוח ולהגשים את הויז׳ן!</a>
+        <a href="javascript:;" class="btn-hero reveal d3 popup-trigger">אני רוצה לחווט מחדש את המוח ולהגשים את הויז׳ן!</a>
       </div>
       <div class="hero-img-wrap reveal d2">
         <img src="assets/Dream & Manifest (1).png" alt="סשן ויז׳ן אישי">
@@ -990,7 +991,7 @@
   <!-- CTA BAND -->
   <section class="cta-band">
     <p class="reveal">רוצה לגלות את הויז׳ן שממתין לך?</p>
-    <a href="javascript:;" onclick="openPopup()" class="btn btn-white reveal d1">אני רוצה לחווט מחדש את המוח ולהגשים את הויז׳ן!</a>
+    <a href="javascript:;" class="btn btn-white reveal d1 popup-trigger">אני רוצה לחווט מחדש את המוח ולהגשים את הויז׳ן!</a>
   </section>
 
   <!-- FAQ -->
@@ -1058,7 +1059,7 @@
         <div class="price-vat">כולל מע״מ</div>
       </div>
     </div>
-    <a href="javascript:;" onclick="openPopup()" class="btn-hero reveal d3">אני רוצה לחווט מחדש את המוח ולהגשים את הויז׳ן!</a>
+    <a href="javascript:;" class="btn-hero reveal d3 popup-trigger">אני רוצה לחווט מחדש את המוח ולהגשים את הויז׳ן!</a>
     <p class="reveal d4" style="font-size:13px; color:rgba(255,255,255,0.35); margin-top:-32px; letter-spacing:0.3px;">🔒 תשלום מאובטח</p>
   </section>
 
@@ -1072,16 +1073,6 @@
     <img id="lightbox-img" src="" alt="">
   </div>
 
-  <script>
-    function openPopup() {
-      if (document.querySelector('script[data-a-vip]')) return;
-      var s = document.createElement('script');
-      s.src = 'https://popup.vp4.me/a_vip.js';
-      s.type = 'text/javascript';
-      s.setAttribute('data-a-vip', '\\0\\\\LandingPage,bab7ad3f-97d5-4a32-aad1-043d5f472a97,611155.aspx?r=1009');
-      document.body.appendChild(s);
-    }
-  </script>
   <script>
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -1110,6 +1101,15 @@
     lb.addEventListener('click', e => { if (e.target !== lbImg) closeLightbox(); });
     document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // Bind popup to all CTA buttons once a_vip is ready
+    (function bindPopup() {
+      if (window.a_vip && a_vip.hookAll) {
+        a_vip.hookAll('.popup-trigger', '\\0\\\\LandingPage,bab7ad3f-97d5-4a32-aad1-043d5f472a97,611155.aspx?r=1009');
+      } else {
+        setTimeout(bindPopup, 100);
+      }
+    })();
   </script>
 
 </body>
