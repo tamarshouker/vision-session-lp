@@ -736,8 +736,13 @@
       display: block;
     }
     @media (max-width: 600px) {
-      .form-modal-box iframe { height: 460px !important; }
-      .form-modal-box { padding-top: 28px; }
+      .form-modal-box {
+        padding-top: 28px;
+        max-height: 96vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+      .form-modal-box iframe { height: 540px !important; }
     }
     .form-modal-title {
       font-size: 20px; font-weight: 800;
