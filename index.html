@@ -669,6 +669,32 @@
       .about-photo { position: static; max-width: 220px; }
     }
 
+    /* ── FLOATING CTA ── */
+    .floating-cta {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      z-index: 500;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      transform: translateX(-50%) translateY(12px);
+      white-space: nowrap;
+    }
+    .floating-cta.visible {
+      opacity: 1; pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .floating-cta a {
+      display: inline-block;
+      background: var(--purple); color: #fff;
+      font-family: var(--font); font-size: 16px; font-weight: 800;
+      padding: 16px 32px; border-radius: 100px;
+      box-shadow: 0 8px 32px rgba(188,103,165,0.55);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .floating-cta a:hover { background: #a8559b; transform: scale(1.03); }
+    @media (min-width: 961px) {
+      .floating-cta { display: none; }
+    }
+
     /* ── FORM MODAL ── */
     .form-modal-overlay {
       display: none; position: fixed; inset: 0; z-index: 9000;
@@ -874,6 +900,11 @@
       </div>
     </div>
   </section>
+
+  <!-- CTA AFTER TESTIMONIALS -->
+  <div style="background: var(--cream); padding: 0 24px 72px; text-align: center;">
+    <a href="javascript:;" class="btn popup-trigger reveal">אני רוצה לחווט מחדש את המוח ולהגשים את הויז׳ן!</a>
+  </div>
 
   <!-- VIDEO -->
   <section class="video-section">
@@ -1092,6 +1123,11 @@
     <p class="reveal d4" style="font-size:13px; color:rgba(255,255,255,0.35); margin-top:-32px; letter-spacing:0.3px;">🔒 תשלום מאובטח</p>
   </section>
 
+  <!-- FLOATING CTA (mobile) -->
+  <div class="floating-cta" id="floatingCta">
+    <a href="javascript:;" class="popup-trigger">אני רוצה לחווט מחדש את המוח ולהגשים את הויז׳ן!</a>
+  </div>
+
   <!-- FORM MODAL -->
   <div class="form-modal-overlay" id="formModal">
     <div class="form-modal-box">
@@ -1118,8 +1154,10 @@
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
     const nav = document.getElementById('nav');
+    const floatingCta = document.getElementById('floatingCta');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 60);
+      floatingCta.classList.toggle('visible', window.scrollY > 500);
     });
 
     // Lightbox
