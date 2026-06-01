@@ -710,7 +710,7 @@
   <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="nav-logo"><img src="assets/logo-final.png" alt="Leap"></div>
-    <a href="#register" class="nav-cta">אני רוצה ויז׳ן!</a>
+    <a href="javascript:;" onclick="openPopup()" class="nav-cta">אני רוצה ויז׳ן!</a>
   </nav>
 
   <!-- HERO -->
@@ -726,7 +726,7 @@
         <p class="hero-body reveal d2">
           סשן 1 על 1 שבו נשלוף יחד את הויז׳ן המדויק שבוער בך, נסגור את החסמים שעוצרים אותך, ותצא עם תמונה כל כך מוחשית שהמוח כבר מתחיל לחוות אותה כמציאות.
         </p>
-        <a href="#register" class="btn-hero reveal d3">אני רוצה לחווט מחדש את המוח ולהגשים את הויז׳ן!</a>
+        <a href="javascript:;" onclick="openPopup()" class="btn-hero reveal d3">אני רוצה לחווט מחדש את המוח ולהגשים את הויז׳ן!</a>
       </div>
       <div class="hero-img-wrap reveal d2">
         <img src="assets/Dream & Manifest (1).png" alt="סשן ויז׳ן אישי">
@@ -990,7 +990,7 @@
   <!-- CTA BAND -->
   <section class="cta-band">
     <p class="reveal">רוצה לגלות את הויז׳ן שממתין לך?</p>
-    <a href="#register" class="btn btn-white reveal d1">אני רוצה לחווט מחדש את המוח ולהגשים את הויז׳ן!</a>
+    <a href="javascript:;" onclick="openPopup()" class="btn btn-white reveal d1">אני רוצה לחווט מחדש את המוח ולהגשים את הויז׳ן!</a>
   </section>
 
   <!-- FAQ -->
@@ -1058,11 +1058,8 @@
         <div class="price-vat">כולל מע״מ</div>
       </div>
     </div>
-    <p class="reveal d3" style="font-size:13px; color:rgba(255,255,255,0.45); margin-bottom:16px; letter-spacing:0.3px;">🔒 כאן עוברים לתשלום מאובטח</p>
-    <div class="form-wrap reveal d3">
-      <iframe width="355" height="326" style="max-width:100%" src="https://embed.vp4.me/LandingPage,bab7ad3f-97d5-4a32-aad1-043d5f472a97,611005.aspx?r=1009" frameborder="0" allowfullscreen class="embediframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation allow-top-navigation-by-user-activation"></iframe>
-      <script type="text/javascript" src="https://embed.vp4.me/core/embd.min.js?v=20260530155820"></script>
-    </div>
+    <a href="javascript:;" onclick="openPopup()" class="btn-hero reveal d3">אני רוצה לחווט מחדש את המוח ולהגשים את הויז׳ן!</a>
+    <p class="reveal d4" style="font-size:13px; color:rgba(255,255,255,0.35); margin-top:-32px; letter-spacing:0.3px;">🔒 תשלום מאובטח</p>
   </section>
 
   <!-- FOOTER -->
@@ -1075,6 +1072,16 @@
     <img id="lightbox-img" src="" alt="">
   </div>
 
+  <script>
+    function openPopup() {
+      if (document.querySelector('script[data-a-vip]')) return;
+      var s = document.createElement('script');
+      s.src = 'https://popup.vp4.me/a_vip.js';
+      s.type = 'text/javascript';
+      s.setAttribute('data-a-vip', '\\0\\\\LandingPage,bab7ad3f-97d5-4a32-aad1-043d5f472a97,611155.aspx?r=1009');
+      document.body.appendChild(s);
+    }
+  </script>
   <script>
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
