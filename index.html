@@ -678,8 +678,12 @@
 
     /* ── MOBILE ── */
     @media (max-width: 960px) {
+      .hero { min-height: auto; padding-bottom: 160px; }
       .hero-inner { grid-template-columns: 1fr; }
-      .hero-img-wrap { max-width: 340px; margin: 0 auto; }
+      .hero-title { font-size: clamp(26px, 7vw, 38px); }
+      .hero-title br { display: none; }
+      .hero-img-wrap { max-width: 100%; margin: 0 auto; }
+      .btn-hero { display: block; text-align: center; }
       .pain-inner { grid-template-columns: 1fr; }
       .pain-photo { display: none; }
       .science-inner { grid-template-columns: 1fr; gap: 48px; }
